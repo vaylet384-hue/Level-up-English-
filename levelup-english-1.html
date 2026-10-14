@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0c2a">
+<title>LevelUp English – Daraja testi</title>
+<style>
+:root{--bg1:#0b0c2a;--bg2:#1a1650;--card:rgba(255,255,255,.07);--card2:rgba(255,255,255,.13);--text:#f3f4ff;--muted:#a9acd6;--border:rgba(255,255,255,.14);--a1:#7c5cff;--a2:#00d4ff;--good:#2ee59d;--bad:#ff5c7a;--warn:#ffc044;--shadow:0 10px 40px rgba(0,0,0,.35);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg1:#eef0ff;--bg2:#dde5ff;--card:rgba(255,255,255,.78);--card2:rgba(255,255,255,.95);--text:#1b1d4a;--muted:#5b5f93;--border:rgba(60,60,140,.16);--shadow:0 10px 30px rgba(60,60,140,.16)}}
+:root[data-theme="dark"]{--bg1:#0b0c2a;--bg2:#1a1650;--card:rgba(255,255,255,.07);--card2:rgba(255,255,255,.13);--text:#f3f4ff;--muted:#a9acd6;--border:rgba(255,255,255,.14)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45;animation:float 14s ease-in-out infinite}
+.bg i:nth-child(1){width:280px;height:280px;background:var(--a1);top:-60px;left:-80px}
+.bg i:nth-child(2){width:260px;height:260px;background:var(--a2);bottom:-80px;right:-70px;animation-delay:-5s}
+.bg i:nth-child(3){width:180px;height:180px;background:#ff5ca8;top:45%;left:55%;animation-delay:-9s;opacity:.25}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.15)}}
+#app{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:18px 16px 40px}
+.screen{animation:in .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+h1{font-size:30px;margin:8px 0;line-height:1.15;letter-spacing:-.5px}
+h2{font-size:22px;margin:6px 0 4px}
+h3{margin:0 0 6px;font-size:17px}
+.sub{color:var(--muted);line-height:1.5;margin:6px 0 16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px;margin:12px 0;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.hero{text-align:center;padding-top:30px}
+.logo{width:96px;height:96px;margin:0 auto 10px;border-radius:28px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 12px 40px rgba(124,92,255,.5);animation:bob 3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.grad{background:linear-gradient(90deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.feat{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 24px}
+.feat span{padding:8px 12px;border-radius:99px;background:var(--card);border:1px solid var(--border);font-size:13px;animation:in .6s both}
+.feat span:nth-child(2){animation-delay:.1s}.feat span:nth-child(3){animation-delay:.2s}.feat span:nth-child(4){animation-delay:.3s}.feat span:nth-child(5){animation-delay:.4s}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:16px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 10px 28px rgba(124,92,255,.45);position:relative;overflow:hidden;transition:transform .15s,box-shadow .2s;margin-top:14px;font-family:inherit}
+.btn:active{transform:scale(.97)}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3s infinite}
+@keyframes shine{0%{left:-60%}60%,100%{left:130%}}
+.btn.ghost{background:var(--card);border:1px solid var(--border);box-shadow:none;color:var(--text)}
+.btn.ghost::after{display:none}
+.btn.good{background:linear-gradient(135deg,#17c98a,#00b3d9)}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px;font-weight:600}
+input,select,textarea{width:100%;padding:14px;border-radius:14px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:16px;font-family:inherit;outline:none;transition:border .2s,box-shadow .2s}
+select option{color:#111}
+input:focus,select:focus,textarea:focus{border-color:var(--a2);box-shadow:0 0 0 3px rgba(0,212,255,.2)}
+textarea{min-height:150px;resize:vertical;line-height:1.5}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:11px 14px;border-radius:14px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:14px;font-weight:600;transition:all .2s;user-select:none}
+.chip.sel{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;border-color:transparent;transform:scale(1.04);box-shadow:0 6px 20px rgba(124,92,255,.4)}
+.lvl{display:flex;align-items:center;gap:14px;padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--border);margin:10px 0;cursor:pointer;transition:transform .2s,border .2s;animation:in .5s both}
+.lvl:active{transform:scale(.97)}.lvl:hover{border-color:var(--a2)}
+.lvl .em{font-size:30px;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--card2)}
+.lvl b{display:block;font-size:16px}.lvl small{color:var(--muted)}
+.lvl .tag{margin-left:auto;font-size:12px;font-weight:700;padding:5px 9px;border-radius:99px;background:var(--card2)}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.top small{color:var(--muted);font-weight:600}
+.bar{height:8px;border-radius:99px;background:var(--card2);overflow:hidden}
+.bar>div{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--a1),var(--a2));transition:width 1s cubic-bezier(.2,.8,.2,1);width:0}
+.q{margin:14px 0}
+.q p{margin:0 0 10px;font-weight:600;line-height:1.45}
+.qn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--a1);color:#fff;font-size:12px;margin-right:8px}
+.opt{display:block;width:100%;text-align:left;padding:13px 14px;margin:7px 0;border-radius:14px;background:var(--card);border:1.5px solid var(--border);color:var(--text);font-size:15px;cursor:pointer;transition:all .18s;font-family:inherit}
+.opt:active{transform:scale(.98)}
+.opt.sel{border-color:var(--a2);background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(0,212,255,.25));transform:translateX(4px)}
+.passage{line-height:1.65;font-size:15px;border-left:4px solid var(--a2);padding-left:12px}
+.play{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:16px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:6px}
+.play .ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff}
+.play small{margin-left:auto;color:var(--muted);font-weight:600}
+.play.on .ic{animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,212,255,.7)}100%{box-shadow:0 0 0 18px rgba(0,212,255,0)}}
+.script{font-size:14px;color:var(--muted);padding:10px;border-radius:12px;background:var(--card);margin:6px 0;font-style:italic}
+.linkbtn{background:none;border:0;color:var(--a2);font-size:13px;cursor:pointer;padding:4px 0;font-family:inherit}
+.mic{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding:13px;border-radius:14px;border:1px dashed var(--a2);color:var(--a2);background:transparent;font-weight:700;width:100%;cursor:pointer;font-size:15px;font-family:inherit}
+.mic.rec{background:var(--bad);color:#fff;border-color:var(--bad);animation:pulse2 1s infinite}
+@keyframes pulse2{0%{box-shadow:0 0 0 0 rgba(255,92,122,.7)}100%{box-shadow:0 0 0 16px rgba(255,92,122,0)}}
+.cnt{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+.loader{text-align:center;padding-top:90px}
+.spin{width:96px;height:96px;margin:0 auto 20px;border-radius:50%;border:6px solid var(--card2);border-top-color:var(--a2);border-right-color:var(--a1);animation:rot 1s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.ringwrap{position:relative;width:200px;height:200px;margin:6px auto}
+.ringwrap svg{transform:rotate(-90deg)}
+.ringwrap .num{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ringwrap .num b{font-size:50px;line-height:1}
+.ringwrap .num small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.fg{transition:stroke-dashoffset 1.8s cubic-bezier(.2,.8,.2,1)}
+.badge{display:inline-block;padding:7px 14px;border-radius:99px;font-weight:800;font-size:14px}
+.b-good{background:rgba(46,229,157,.18);color:var(--good)}.b-mid{background:rgba(255,192,68,.18);color:var(--warn)}.b-bad{background:rgba(255,92,122,.18);color:var(--bad)}
+.sec .hd{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sec .hd .e{font-size:22px}
+.sec .hd b{flex:1}.sec .hd span{font-weight:800}
+.miss{font-size:13px;line-height:1.5;padding:9px 11px;border-radius:12px;background:rgba(255,92,122,.1);border-left:3px solid var(--bad);margin:7px 0}
+.note{font-size:13px;line-height:1.5;padding:9px 11px;border-radius:12px;background:var(--card);border-left:3px solid var(--warn);margin:7px 0}
+.ok{font-size:13px;padding:9px 11px;border-radius:12px;background:rgba(46,229,157,.1);border-left:3px solid var(--good);margin:7px 0}
+.ready{display:flex;gap:12px;align-items:center}
+.ready .ic{font-size:34px}
+.toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(30px);background:var(--card2);color:var(--text);padding:12px 18px;border-radius:14px;border:1px solid var(--border);box-shadow:var(--shadow);opacity:0;transition:all .3s;z-index:20;font-size:14px;max-width:88%;text-align:center;backdrop-filter:blur(12px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+#conf{position:fixed;inset:0;z-index:10;pointer-events:none}
+.big{font-size:60px;text-align:center;animation:bob 2.5s infinite}
+.center{text-align:center}
+</style>
+</head>
+<body>
+<div class="bg"><i></i><i></i><i></i></div>
+<div id="app"></div>
+<canvas id="conf"></canvas>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ MA'LUMOTLAR ============ */
+const LEVELS=[
+ {n:"Beginner",cefr:"A1",e:"🌱",d:"Endi boshlayapman, oddiy so'zlarni bilaman"},
+ {n:"Elementary",cefr:"A2",e:"🌿",d:"Oddiy gaplar tuza olaman"},
+ {n:"Pre-Intermediate",cefr:"A2+/B1-",e:"🍀",d:"Kundalik mavzularda gaplasha olaman"},
+ {n:"Intermediate",cefr:"B1",e:"🌳",d:"Fikrimni bayon qila olaman"},
+ {n:"Upper-Intermediate",cefr:"B2",e:"🚀",d:"Erkin va aniq muloqot qilaman"},
+ {n:"Advanced",cefr:"C1",e:"👑",d:"Murakkab mavzularda ham ravon gapiraman"}
+];
+const SK={
+ listening:{n:"Listening",e:"🎧",w:.2,uz:"Tinglab tushunish"},
+ reading:{n:"Reading",e:"📖",w:.2,uz:"O'qib tushunish"},
+ grammar:{n:"Grammar",e:"🧩",w:.15,uz:"Grammatika"},
+ vocab:{n:"Vocabulary",e:"📚",w:.15,uz:"Lug'at boyligi"},
+ writing:{n:"Writing",e:"✍️",w:.15,uz:"Yozma nutq"},
+ speaking:{n:"Speaking",e:"🎤",w:.15,uz:"Og'zaki nutq"}
+};
+const TIPS={
+ listening:"Har kuni 15–20 daqiqa BBC Learning English yoki subtitrli podcast tinglang, so'ng eshitganingizni takrorlang.",
+ reading:"Kuniga 1–2 ta qisqa maqola o'qing, noma'lum so'zlarni yozib boring va asosiy fikrni 1 gapda ifodalashga o'rganing.",
+ grammar:"Har hafta bitta mavzuni (zamonlar, shart gaplar, modal fe'llar) tanlab, 20 tadan mashq bajaring.",
+ vocab:"Kuniga 8–10 ta yangi so'zni gap ichida yodlang va takrorlash uchun kartochkalar ishlating.",
+ writing:"Haftada 2–3 marta 100–150 so'zli matn yozing; bog'lovchilar (however, although, because) va gaplar tuzilishiga e'tibor bering.",
+ speaking:"Har kuni 5 daqiqa o'z fikringizni ovoz chiqarib ayting, o'zingizni yozib oling va xatolaringizni eshiting."
+};
+
+const GR=[
+[["I ___ a student.","am","is","are","be"],["She ___ from Uzbekistan.","is","am","are","be"],["They ___ my friends.","are","is","am","be"],["This is ___ apple.","an","a","some","many"],["We ___ football on Sunday.","play","plays","playing","to play"],["There ___ two books on the table.","are","is","am","be"],["What ___ your name?","is","are","am","do"]],
+[["He ___ to school every day.","goes","go","going","is go"],["I ___ TV now.","am watching","watch","watches","watched"],["Yesterday we ___ to the park.","went","go","goes","going"],["She has ___ brothers.","two","a","much","any"],["Is there ___ milk in the fridge?","any","an","many","a"],["My sister is ___ than me.","taller","tall","more tall","tallest"],["I ___ my homework last night.","did","do","does","doing"]],
+[["If it rains, we ___ at home.","will stay","would stay","stayed","staying"],["I have lived here ___ 2015.","since","for","from","during"],["She is the ___ student in our class.","most intelligent","more intelligent","intelligentest","most intelligenter"],["You ___ wear a seat belt. It's the law.","must","can","might","would"],["I was walking when it ___ to rain.","started","was starting","has started","starts"],["He asked me where ___.","I lived","did I live","do I live","I living"],["The book ___ by millions of people.","was read","read","was reading","has read"]],
+[["I wish I ___ more free time.","had","have","would have","has"],["By the time we arrived, the film ___.","had started","started","has started","was starting"],["She suggested ___ a taxi.","taking","to take","take","took"],["If I had known, I ___ you.","would have told","would tell","will tell","had told"],["The man ___ lives next door is a doctor.","who","which","whose","whom"],["I'm not used to ___ up early.","getting","get","got","being get"],["He ___ have left already; his car isn't here.","must","should","would","need"]],
+[["Hardly ___ the station when the train left.","had we reached","we had reached","did we reach","we reached"],["Had I known, I ___ differently.","would have acted","will act","would act","had acted"],["She denied ___ the money.","taking","to take","take","to have take"],["The report is said ___ by experts.","to have been written","to write","writing","to be wrote"],["Not only ___ late, but he also forgot the documents.","did he arrive","he arrived","arrived he","he did arrive"],["I'd rather you ___ smoke here.","didn't","don't","won't","not"],["___ the bad weather, the match went ahead.","Despite","Although","However","Because"]],
+[["Were it not for your help, we ___ failed.","would have","will have","had","would"],["No sooner had she sat down ___ the phone rang.","than","then","that","as"],["It is high time we ___ action.","took","take","taking","would take"],["She spoke as though she ___ the answer.","knew","knows","would know","has known"],["The committee insisted that he ___ the proposal.","withdraw","withdraws","withdrew","would withdraw"],["Little ___ that the plan would fail.","did they know","they knew","knew they","they did know"],["Under no circumstances ___ be opened.","should the door","the door should","does the door","the door must"]]
+];
+const VO=[
+[["The opposite of 'big' is ___.","small","tall","new","hot"],["We eat breakfast in the ___.","morning","night","winter","Monday"],["A ___ is an animal that says 'meow'.","cat","dog","cow","bird"],["I drink ___ when I am thirsty.","water","bread","chair","shoes"],["Seven days make one ___.","week","month","year","hour"],["The colour of the sky on a sunny day is ___.","blue","black","pink","brown"],["You write with a ___.","pen","plate","door","shoe"]],
+[["A person who teaches students is a ___.","teacher","doctor","driver","farmer"],["I buy food at the ___.","supermarket","library","airport","hospital"],["The opposite of 'cheap' is ___.","expensive","quick","easy","near"],["It is very cold in ___.","winter","summer","July","noon"],["I go to the ___ when I'm ill.","doctor","bank","cinema","museum"],["A room where you cook is a ___.","kitchen","bedroom","garage","bathroom"],["My mother's mother is my ___.","grandmother","aunt","cousin","niece"]],
+[["I need to ___ a hotel room for my trip.","book","borrow","bring","bake"],["He was ___ because he lost his keys.","worried","delicious","comfortable","wonderful"],["Please ___ the lights when you leave.","turn off","turn up","turn into","turn on"],["The flight was ___ because of fog.","delayed","borrowed","invited","wasted"],["She has a lot of ___ for the job.","experience","experiment","expression","expedition"],["I'm ___ in learning Spanish.","interested","interesting","interest","interests"],["A ___ is money you get for doing work.","salary","ticket","receipt","discount"]],
+[["Her speech was very ___; everyone cried.","moving","moved","move","movement"],["She decided to ___ up smoking.","give","put","take","make"],["The company will ___ 50 new staff.","recruit","rescue","repair","remind"],["The film got great ___ from critics.","reviews","advices","informations","lessons"],["I'm ___ about the exam results.","anxious","anxiety","anxiously","anxieties"],["The two ideas are very ___; they're almost the same.","similar","various","opposite","separate"],["He apologised for ___ me waiting.","keeping","hanging","taking","getting"]],
+[["The new law will ___ small businesses.","benefit","beneficial","beneficially","benefiting"],["She's a very ___ person; she never gives up.","determined","determine","determination","determining"],["The scientist made a major ___ in cancer research.","breakthrough","break-in","breakdown","breakout"],["Prices have ___ sharply this year.","soared","drowned","wandered","melted"],["His argument was not ___; it had no evidence.","convincing","convinced","convince","convinces"],["We must ___ the risks before investing.","assess","asset","access","assent"],["The two companies decided to ___ and form one.","merge","mend","mark","march"]],
+[["His ___ remarks offended many people.","disparaging","dispatching","discerning","disbanding"],["The politician's promises were ___; nobody believed them.","hollow","tender","brisk","modest"],["She has a ___ for languages.","knack","nick","knock","notch"],["The evidence was ___ — it could be read two ways.","ambiguous","ambitious","ambient","amiable"],["The company is on the ___ of bankruptcy.","brink","brim","brick","brow"],["There is a ___ difference between the proposals; hardly anyone can tell.","subtle","subtitle","subside","subdue"],["He tried to ___ the situation by joking.","defuse","diffuse","refuse","confuse"]]
+];
+/* [matn, savol, to'g'ri, xato1, xato2, xato3] */
+const LI=[
+[["Hello, my name is Anna. I am ten years old. I live in Tashkent.","How old is Anna?","Ten","Twelve","Nine","Fifteen"],["This is my brother Tom. He likes football and he has a red ball.","What does Tom like?","Football","Music","Swimming","Books"],["It is Monday today. I go to school at eight o'clock.","When does the speaker go to school?","At eight","At nine","At seven","At ten"],["I have a cat. Its name is Max. Max is black.","What colour is Max?","Black","White","Brown","Red"],["My mother is in the kitchen. She is cooking rice.","What is the mother doing?","Cooking rice","Reading","Sleeping","Watching TV"]],
+[["I usually get up at half past six, have breakfast and take the bus to work. The bus ride takes twenty minutes.","How long is the bus ride?","Twenty minutes","One hour","Ten minutes","Half an hour"],["Excuse me, where is the post office? Go straight, then turn left at the bank. It's next to the café.","Where is the post office?","Next to the café","Behind the bank","Opposite the school","Near the park"],["Last weekend we visited my grandparents. We had lunch together and played cards in the garden.","What did they do in the garden?","Played cards","Had lunch","Watered flowers","Watched TV"],["I'd like a cheese sandwich and an orange juice, please. That's four dollars fifty.","How much is the order?","Four dollars fifty","Five dollars","Three dollars fifty","Four dollars"],["The weather tomorrow will be cloudy in the morning and sunny in the afternoon.","How will the afternoon be?","Sunny","Cloudy","Rainy","Windy"]],
+[["Hi, this is Sarah. I'm calling about the flat you advertised. Is it still available? It has two bedrooms, right?","Why is Sarah calling?","To ask about a flat","To book a hotel","To sell a car","To find a job"],["Our train to Samarkand leaves from platform five at ten forty. Passengers should arrive at least thirty minutes early.","Which platform does the train leave from?","Platform five","Platform ten","Platform four","Platform forty"],["I used to play tennis every weekend, but I stopped last year because of an injury to my knee.","Why did he stop playing tennis?","A knee injury","No time","It was expensive","He moved away"],["The museum is open from nine to five, except on Mondays when it's closed. Tickets for students are half price.","When is the museum closed?","Mondays","Sundays","Fridays","Saturdays"],["I'm thinking of joining a gym, but the membership costs a hundred dollars a month, which is too much for me.","Why doesn't the speaker join the gym?","It is too expensive","It is too far","It is too crowded","It is too noisy"]],
+[["Due to roadworks, the main bridge will be closed for two weeks. Drivers are advised to use the northern route, which adds about fifteen minutes to the journey.","What are drivers advised to do?","Use the northern route","Wait two weeks","Take the train","Drive faster"],["I was going to cycle to work, but it's pouring with rain, so I'll take the metro and get a coffee on the way.","Why will the speaker take the metro?","It's raining heavily","The bike is broken","They are late","It is cheaper"],["The lecture on climate change has been moved from Room 12 to the main hall because so many students have signed up.","Why was the lecture moved?","Many students signed up","The room is dirty","The lecturer is ill","The projector is broken"],["Although the hotel was beautiful, the service was disappointing, and we had to wait an hour for our room.","What was disappointing?","The service","The view","The food","The price"],["If you want to improve your pronunciation, I'd recommend recording yourself and comparing it with native speakers.","What does the speaker recommend?","Recording yourself","Memorising grammar","Moving abroad","Writing essays"]],
+[["Contrary to popular belief, the tourism sector didn't recover as quickly as predicted; analysts blame rising fuel costs and staff shortages.","What do analysts blame?","Fuel costs and staff shortages","Bad weather","New taxes","Lack of advertising"],["The project's deadline has been postponed, though not by much; we now have until the end of the month, instead of the fifteenth.","What is the new deadline?","The end of the month","The fifteenth","Next year","Next week"],["Having worked in marketing for a decade, she decided to retrain as a nurse, which she describes as the most rewarding decision of her life.","What did she do after working in marketing?","Retrained as a nurse","Retired","Started a business","Moved abroad"],["Researchers found that people who sleep fewer than six hours a night are significantly more likely to suffer from stress-related problems.","Who is more likely to suffer from stress problems?","People sleeping under six hours","People sleeping over nine hours","People who exercise","People who work nights"],["The seminar was supposed to focus on renewable energy, but the speaker spent most of the time discussing government policy.","What did the speaker mainly discuss?","Government policy","Renewable energy","Solar technology","Job opportunities"]],
+[["While the initial findings seemed promising, the follow-up study, which involved a far larger sample, failed to replicate the effect, casting doubt on the original conclusions.","What did the follow-up study do?","Failed to replicate the effect","Confirmed the effect","Used a smaller sample","Was never published"],["The author's latest novel, though ostensibly a detective story, is in reality a meditation on memory and loss.","What is the novel really about?","Memory and loss","A crime","A journey","Politics"],["Economists remain divided: some argue that tighter regulation will curb inflation, whereas others contend it will merely stifle growth.","What is the disagreement about?","Whether regulation curbs inflation or only stifles growth","Whether inflation exists","Whether growth is desirable","Whether economists should advise"],["Far from being a setback, the merger, in the chairman's words, positioned the firm to compete globally, though shareholders remained sceptical.","How did shareholders feel?","Sceptical","Delighted","Indifferent","Furious"],["The architect insisted that functionality should take precedence over ornamentation, a view that was considered radical at the time.","What did the architect prioritise?","Functionality","Decoration","Cost","Tradition"]]
+];
+/* [matn, [[savol,to'g'ri,x1,x2,x3] x3]] */
+const RD=[
+[["Tom is a boy. He is eight. He lives in a small house with his mother, father and sister. He has a dog. The dog's name is Rex. Tom plays with Rex in the garden every day.",[["How old is Tom?","Eight","Six","Ten","Eleven"],["What is the dog's name?","Rex","Max","Bob","Tom"],["Where does Tom play with the dog?","In the garden","At school","In the kitchen","In the park"]]],
+ ["Lola likes fruit. She eats an apple in the morning and a banana in the afternoon. She does not like oranges. On Sunday she goes to the market with her mother to buy fruit.",[["When does Lola eat an apple?","In the morning","In the afternoon","At night","On Sunday"],["Which fruit doesn't she like?","Oranges","Apples","Bananas","Grapes"],["Where does she go on Sunday?","To the market","To school","To the park","To the cinema"]]]],
+[["Last summer, Aziz went to Bukhara with his family. They stayed in a small hotel near the old city. Every morning they walked around the old streets and visited museums. In the evening they ate plov in a local restaurant. Aziz took many photos, and he wants to go back next year.",[["Where did they stay?","In a small hotel","With relatives","In a tent","In a big resort"],["What did they do in the evening?","Ate plov","Went swimming","Played football","Studied"],["What does Aziz want to do next year?","Go back to Bukhara","Go to Samarkand","Buy a house","Learn photography"]]],
+ ["Maria works in a bookshop. She starts work at nine and finishes at six. She likes her job because she meets interesting people, but she doesn't like working on Saturdays. On Sundays she relaxes at home and reads novels.",[["When does she finish work?","At six","At five","At nine","At seven"],["Why does she like her job?","She meets interesting people","The pay is high","The hours are short","She gets free books"],["What does she do on Sundays?","Reads novels","Works","Goes shopping","Visits friends"]]]],
+[["More and more people are choosing to work from home. This saves time and money because there is no need to travel to an office. However, some workers say they feel lonely and find it difficult to separate work from free time. Many companies now offer a mix: two or three days at home and the rest in the office.",[["What is one advantage of working from home?","It saves time and money","Higher salaries","More holidays","More meetings"],["What problem do some workers mention?","Loneliness","Traffic","Low pay","Strict bosses"],["What do many companies offer now?","A mix of home and office work","Only home work","Longer holidays","No breaks"]]],
+ ["The Silk Road was not a single road but a network of trade routes connecting China with the Mediterranean. Merchants carried silk, spices and paper, but also ideas and religions. Cities such as Samarkand and Bukhara grew rich because they were on these routes.",[["What was the Silk Road?","A network of trade routes","One long road","A railway","A river"],["What else travelled along it?","Ideas and religions","Only silk","Only soldiers","Only animals"],["Why did Samarkand grow rich?","It was on the trade routes","It had gold","It was near the sea","It had many farms"]]]],
+[["Sleep experts recommend that adults get between seven and nine hours of sleep each night. Lack of sleep affects concentration and memory, and over time can increase the risk of health problems. Surprisingly, using phones before bed can make it harder to fall asleep, because the screen light confuses the body's natural clock.",[["How much sleep do experts recommend?","7–9 hours","5–6 hours","10–12 hours","4 hours"],["Why can phones before bed be a problem?","Screen light confuses the body clock","They are noisy","They cause stress at work","They heat the room"],["What does lack of sleep affect?","Concentration and memory","Eyesight","Height","Hearing"]]],
+ ["Many cities are introducing bicycle lanes to reduce traffic and pollution. Supporters argue that cycling is healthy, cheap and good for the environment. Critics, however, claim that the lanes take up space that drivers need and may increase congestion. Studies so far show mixed results, depending on how the lanes are designed.",[["Why are cities introducing bicycle lanes?","To reduce traffic and pollution","To make roads wider","To earn money","To attract tourists"],["What do critics claim?","Lanes may increase congestion","Cycling is expensive","Lanes cause pollution","Bikes are noisy"],["What do studies show?","Mixed results","Clear success","Total failure","Nothing at all"]]]],
+[["The concept of a four-day working week, once dismissed as unrealistic, has gained traction after several pilot schemes reported unchanged productivity and improved employee wellbeing. Nevertheless, sceptics point out that such arrangements may not suit sectors like healthcare, where continuous coverage is essential.",[["What did the pilot schemes report?","Unchanged productivity and better wellbeing","Lower productivity","Higher costs","More absence"],["Why are sceptics doubtful?","It may not suit sectors needing constant coverage","Workers dislike it","It is illegal","It costs more"],["What does 'gained traction' suggest?","It became more popular and accepted","It lost support","It became illegal","It was ignored"]]],
+ ["Language extinction is accelerating: linguists estimate that one language dies out roughly every two weeks. When a language disappears, so does a unique way of understanding the world, including traditional knowledge about local plants and animals. Some communities are fighting back through schools and digital apps that teach children their ancestral tongues.",[["How often does a language die out, roughly?","Every two weeks","Every year","Every decade","Every day"],["What is lost besides words?","Traditional knowledge and a way of seeing the world","Only grammar","Only songs","Nothing"],["How are some communities responding?","Through schools and apps","By banning English","By ignoring it","By writing dictionaries only"]]]],
+[["Behavioural economists have challenged the assumption that humans are rational decision-makers. Experiments show that people systematically overvalue what they already own, a phenomenon known as the endowment effect, and are disproportionately averse to losses relative to equivalent gains. These findings have prompted governments to design 'nudges' that steer citizens towards beneficial choices without restricting freedom.",[["What assumption have they challenged?","That humans are rational decision-makers","That markets exist","That governments are efficient","That money matters"],["What is the endowment effect?","Overvaluing what one owns","Fearing the unknown","Undervaluing gifts","Copying others"],["What are nudges designed to do?","Steer people to good choices without restricting freedom","Ban harmful products","Tax unhealthy choices","Punish bad decisions"]]],
+ ["Although often portrayed as a solitary genius, the typical scientist rarely works in isolation. Major discoveries tend to emerge from collaborative networks in which ideas are exchanged, refined and occasionally discarded. Historians of science argue that the lone-inventor narrative persists because it is simpler and more dramatic than the messy reality of collective effort.",[["What does the passage suggest about scientists?","They usually collaborate","They prefer isolation","They avoid criticism","They never discard ideas"],["Why does the lone-inventor narrative persist?","It is simpler and more dramatic","It is accurate","Scientists promote it","It is new"],["What does 'messy reality' refer to?","Collective effort","Scientific errors only","Lack of funding","Public ignorance"]]]]
+];
+const WR=[
+["Write 3–5 simple sentences about yourself: your name, age and family.","Write about your favourite food.","Describe your room in a few sentences."],
+["Write about your last weekend. What did you do?","Describe your best friend.","Write about your daily routine."],
+["Write a short email to a friend inviting him or her to your birthday party.","Describe your hometown and say what you like about it.","Write about a holiday that you remember."],
+["Some people prefer studying alone, others in groups. Which do you prefer and why?","Describe a problem in your city and suggest a solution.","Write about a person who has influenced you."],
+["Do the advantages of social media outweigh the disadvantages? Give your opinion.","Some people think students should wear uniforms. Discuss both views and give your opinion.","Describe a change that has improved your community and explain why."],
+["To what extent should governments restrict the use of private cars in city centres?","Is technology making people more isolated? Discuss and evaluate.","Some argue that university education should be free for everyone. Critically discuss."]
+];
+const SP=[
+["Tell me your name and your age.","What is your favourite colour and why?","Do you have a pet? Tell me about it.","What do you eat for breakfast?"],
+["What do you do on weekends?","Describe your family.","What did you do yesterday?","What is your favourite season and why?"],
+["Talk about your hometown.","Describe your favourite hobby.","Tell me about a trip you took.","What do you want to do next year?"],
+["Describe a book or film you enjoyed and explain why.","Talk about a person you admire.","What are the advantages of learning English?","Describe a memorable day in your life."],
+["Do you think people read less today? Why?","Describe a challenge you overcame.","How has technology changed education?","Talk about an important decision you made."],
+["Is it better to live in a city or in the countryside? Justify your view.","How might artificial intelligence change the job market?","Discuss the impact of tourism on local culture.","Should success be measured by money? Evaluate."]
+];
+const WMIN=[15,30,60,100,150,200], SMIN=[8,15,30,50,70,90];
+
+/* ============ YORDAMCHI ============ */
+const $=s=>document.querySelector(s);
+const app=$('#app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(a,n)=>shuffle(a).slice(0,n);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+let S={p:{},L:null,weak:[],fmt:'',goal:'',T:[],ti:0,R:null,retake:false};
+function show(html){app.innerHTML='<div class="screen">'+html+'</div>';window.scrollTo(0,0)}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2600)}
+function shakeEl(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}
+
+/* ============ EKRANLAR ============ */
+function welcome(){
+ S={p:{},L:null,weak:[],fmt:'',goal:'',T:[],ti:0,R:null,retake:false};
+ show(`<div class="hero">
+  <div class="logo">🎓</div>
+  <h1><span class="grad">LevelUp</span> English</h1>
+  <p class="sub">IELTS yoki CEFR (sertifikat) imtihoniga tayyor ekaningizni aniqlang. Test har safar yangi savollar bilan tuziladi.</p>
+  <div class="feat"><span>🎧 Listening</span><span>📖 Reading</span><span>🧩 Grammar</span><span>✍️ Writing</span><span>🎤 Speaking</span></div>
+  <button class="btn" onclick="profile()">Boshlash →</button>
+ </div>`);
+}
+function profile(){
+ const p=S.p;
+ show(`<h2>👋 Keling, tanishamiz</h2><p class="sub">Ma'lumotlaringizni kiriting</p>
+ <div class="card" id="pf">
+  <div class="row"><div><label>Ism</label><input id="f_name" placeholder="Masalan: Aziz" value="${esc(p.name||'')}"></div>
+  <div><label>Familiya</label><input id="f_sur" placeholder="Karimov" value="${esc(p.sur||'')}"></div></div>
+  <label>Yosh</label><input id="f_age" type="number" inputmode="numeric" min="5" max="99" placeholder="Masalan: 19" value="${p.age||''}">
+  <label>Ingliz tilini qancha vaqtdan beri o'rganyapsiz?</label>
+  <div class="row"><input id="f_dur" type="number" inputmode="numeric" min="0" max="60" placeholder="Son" value="${p.dur!==undefined?p.dur:''}">
+  <select id="f_unit"><option value="oy" ${p.unit==='oy'?'selected':''}>oy</option><option value="yil" ${p.unit==='yil'?'selected':''}>yil</option></select></div>
+  <label>Asosan qaysi formatda o'rgangansiz?</label>
+  <div class="chips" id="g_fmt">
+   ${['Offline (kurs/maktab)','Online (internet/ilova)','Aralash'].map(v=>`<div class="chip ${S.fmt===v?'sel':''}" onclick="chip('fmt','${v}',this)">${v}</div>`).join('')}
+  </div>
+  <label>Maqsadingiz</label>
+  <div class="chips" id="g_goal">
+   ${['IELTS','CEFR (sertifikat)','Ikkalasi'].map(v=>`<div class="chip ${S.goal===v?'sel':''}" onclick="chip('goal','${v}',this)">${v}</div>`).join('')}
+  </div>
+ </div>
+ <button class="btn" onclick="saveProfile()">Davom etish →</button>`);
+}
+function chip(k,v,el){S[k]=v;el.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));el.classList.add('sel')}
+function saveProfile(){
+ const g=id=>$('#'+id).value.trim();
+ const name=g('f_name'),sur=g('f_sur'),age=+g('f_age'),dur=g('f_dur');
+ let err='';
+ if(!name)err='Ismingizni kiriting';else if(!sur)err='Familiyangizni kiriting';
+ else if(!age||age<5||age>99)err='Yoshingizni to\'g\'ri kiriting';
+ else if(dur===''||+dur<0)err='Qancha vaqt o\'rganganingizni kiriting';
+ else if(!S.fmt)err='O\'rganish formatini tanlang';
+ else if(!S.goal)err='Maqsadingizni tanlang';
+ if(err){toast(err);shakeEl($('#pf'));return}
+ S.p={name,sur,age,dur:+dur,unit:$('#f_unit').value,fmt:S.fmt,goal:S.goal};
+ levelScreen();
+}
+function levelScreen(){
+ show(`<h2>📊 Darajangiz qaysi?</h2><p class="sub">${esc(S.p.name)}, o'zingizni qaysi darajada deb hisoblaysiz?</p>
+ ${LEVELS.map((l,i)=>`<div class="lvl" style="animation-delay:${i*.07}s" onclick="setLevel(${i})"><div class="em">${l.e}</div><div><b>${l.n}</b><small>${l.d}</small></div><span class="tag">${l.cefr}</span></div>`).join('')}`);
+}
+function setLevel(i){S.L=i;weakScreen()}
+function weakScreen(){
+ const items=Object.keys(SK);
+ show(`<h2>🎯 Qayerda qiynalasiz?</h2><p class="sub">Bir nechtasini tanlashingiz mumkin</p>
+ <div class="card"><div class="chips" id="wk">
+  ${items.map(k=>`<div class="chip" data-k="${k}" onclick="tw('${k}',this)">${SK[k].e} ${SK[k].n}</div>`).join('')}
+  <div class="chip" data-k="none" onclick="tw('none',this)">🙂 Aniq bilmayman</div>
+ </div></div>
+ <button class="btn" onclick="readyScreen()">Davom etish →</button>`);
+ S.weak=[];
+}
+function tw(k,el){
+ if(k==='none'){S.weak=[];document.querySelectorAll('#wk .chip').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');return}
+ document.querySelector('#wk [data-k="none"]').classList.remove('sel');
+ const i=S.weak.indexOf(k);if(i>=0){S.weak.splice(i,1);el.classList.remove('sel')}else{S.weak.push(k);el.classList.add('sel')}
+}
+function readyScreen(){
+ const l=LEVELS[S.L];
+ show(`<div class="center"><div class="big">${S.retake?'🎯':'🚀'}</div>
+ <h2>${S.retake?'Asl darajangizdagi test':'Test tayyor!'}</h2>
+ <p class="sub">${S.retake?`Natijangizga ko'ra sizga <b>${l.n} (${l.cefr})</b> darajasidagi test tanlandi.`:`<b>${esc(S.p.name)}</b>, siz <b>${l.n} (${l.cefr})</b> darajasidagi testni topshirasiz.`}</p></div>
+ <div class="card">
+  ${Object.keys(SK).map(k=>`<div class="ready" style="padding:7px 0"><span class="ic" style="font-size:24px">${SK[k].e}</span><div><b>${SK[k].n}</b><div style="color:var(--muted);font-size:13px">${SK[k].uz}</div></div></div>`).join('')}
+ </div>
+ <div class="card" style="font-size:13px;color:var(--muted)">💡 Listening uchun qurilma ovozini yoqing. Speaking bo'limida mikrofon ishlamasa, javobni yozib kiritishingiz mumkin.</div>
+ <button class="btn" onclick="startTest()">Testni boshlash 🚀</button>`);
+}
+
+/* ============ TEST TUZISH ============ */
+function mix(a){return shuffle(a)}
+function mcq(arr){return {q:arr[0],ans:arr[1],opts:mix(arr.slice(1)),user:null}}
+function buildTest(L){
+ const lis=pick(LI[L],3).map(x=>({script:x[0],q:x[1],ans:x[2],opts:mix(x.slice(2)),user:null,plays:0}));
+ const rp=pick(RD[L],1)[0];
+ return [
+  {id:'listening',type:'mcq',items:lis},
+  {id:'reading',type:'mcq',passage:rp[0],items:rp[1].map(mcq)},
+  {id:'grammar',type:'mcq',items:pick(GR[L],4).map(mcq)},
+  {id:'vocab',type:'mcq',items:pick(VO[L],4).map(mcq)},
+  {id:'writing',type:'txt',prompt:pick(WR[L],1)[0],min:WMIN[L],text:''},
+  {id:'speaking',type:'txt',prompt:pick(SP[L],1)[0],min:SMIN[L],text:''}
+ ];
+}
+function startTest(){S.T=buildTest(S.L);S.ti=0;renderSec()}
+function renderSec(){
+ const sec=S.T[S.ti],k=SK[sec.id],n=S.T.length;
+ let body='';
+ if(sec.id==='listening'){
+  body=`<p class="sub">Har bir audioni 2 martagacha tinglashingiz mumkin.</p>`+sec.items.map((it,i)=>`
+   <div class="card q"><button class="play" id="pl${i}" onclick="say(${i},this)"><span class="ic">🔊</span>Audio ${i+1}<small>2 marta</small></button>
+   <button class="linkbtn" onclick="revealScript(${i})">Ovoz chiqmasa — matnni ko'rsatish</button><div id="sc${i}"></div>
+   <p style="margin-top:8px"><span class="qn">${i+1}</span>${esc(it.q)}</p>${optsHtml(it,i)}</div>`).join('');
+ }else if(sec.id==='reading'){
+  body=`<div class="card"><div class="passage">${esc(sec.passage)}</div></div>`+sec.items.map((it,i)=>`<div class="card q"><p><span class="qn">${i+1}</span>${esc(it.q)}</p>${optsHtml(it,i)}</div>`).join('');
+ }else if(sec.type==='mcq'){
+  body=sec.items.map((it,i)=>`<div class="card q"><p><span class="qn">${i+1}</span>${esc(it.q)}</p>${optsHtml(it,i)}</div>`).join('');
+ }else{
+  const sp=sec.id==='speaking';
+  body=`<div class="card"><h3>${sp?'🎤 Savol':'📝 Topshiriq'}</h3><p style="margin:0;line-height:1.5">${esc(sec.prompt)}</p><p class="sub" style="margin:8px 0 0;font-size:13px">Kamida ${sec.min} ta so'z${sp?' gapiring (yoki yozing)':' yozing'}. Faqat inglizcha.</p></div>
+  <div class="card"><textarea id="ans" placeholder="${sp?'Mikrofonni bosib gapiring yoki shu yerga yozing…':'Javobingizni shu yerga yozing…'}" oninput="onTxt(this)">${esc(sec.text)}</textarea>
+  <div class="cnt" id="cnt">${wc(sec.text)} / ${sec.min} so'z</div>
+  ${sp?`<button class="mic" onclick="mic(this)">🎙️ Gapirish (mikrofon)</button>`:''}</div>`;
+ }
+ const last=S.ti===n-1;
+ show(`<div class="top"><small>${k.e} ${k.n}</small><small>${S.ti+1} / ${n}</small></div>
+ <div class="bar"><div id="pb"></div></div>
+ <h2 style="margin-top:14px">${k.e} ${k.n}</h2>${body}
+ <button class="btn ${last?'good':''}" onclick="nextSec()">${last?'Testni yakunlash ✅':'Keyingisi →'}</button>`);
+ setTimeout(()=>{const pb=$('#pb');if(pb)pb.style.width=((S.ti)/n*100+8)+'%'},50);
+}
+function optsHtml(it,i){return it.opts.map((o,j)=>`<button class="opt ${it.user===o?'sel':''}" onclick="pickOpt(${i},${j},this)">${esc(o)}</button>`).join('')}
+function pickOpt(i,j,el){const it=S.T[S.ti].items[i];it.user=it.opts[j];el.parentNode.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel')}
+const wc=t=>((t||'').toLowerCase().match(/[a-z']+/g)||[]).length;
+function onTxt(ta){const s=S.T[S.ti];s.text=ta.value;$('#cnt').textContent=wc(ta.value)+' / '+s.min+" so'z"}
+function say(i,btn){
+ const it=S.T[S.ti].items[i];
+ if(!('speechSynthesis' in window)){toast("Bu qurilmada ovoz ishlamaydi, matn ko'rsatildi");revealScript(i);return}
+ if(it.plays>=2){toast("Bu audioni 2 martadan ortiq tinglab bo'lmaydi");return}
+ it.plays++;
+ try{
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(it.script);u.lang='en-US';u.rate=[.75,.8,.85,.9,.95,1][S.L];
+  u.onstart=()=>btn.classList.add('on');u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+ }catch(e){revealScript(i)}
+ btn.querySelector('small').textContent=(2-it.plays)+' marta qoldi';
+}
+function revealScript(i){$('#sc'+i).innerHTML='<div class="script">'+esc(S.T[S.ti].items[i].script)+'</div>'}
+let rec=null;
+function mic(btn){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){toast("Mikrofon bu qurilmada ishlamaydi. Javobni yozib kiriting.");return}
+ if(rec){try{rec.stop()}catch(e){}return}
+ try{
+  rec=new SR();rec.lang='en-US';rec.continuous=true;rec.interimResults=false;
+  rec.onresult=e=>{let t='';for(let i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)t+=e.results[i][0].transcript+' ';const ta=$('#ans');ta.value=(ta.value+' '+t).trim();onTxt(ta)};
+  rec.onend=()=>{rec=null;btn.classList.remove('rec');btn.textContent='🎙️ Gapirish (mikrofon)'};
+  rec.onerror=()=>toast("Mikrofon xatosi. Javobni yozib kiriting.");
+  rec.start();btn.classList.add('rec');btn.textContent='⏹️ To\'xtatish';
+ }catch(e){rec=null;toast("Mikrofonni ishga tushirib bo'lmadi")}
+}
+function nextSec(){
+ if(rec){try{rec.stop()}catch(e){}}
+ try{speechSynthesis.cancel()}catch(e){}
+ if(S.ti<S.T.length-1){S.ti++;renderSec()}else finish();
+}
+
+/* ============ BAHOLASH ============ */
+const CONN=['because','but','however','although','and','so','also','first','firstly','secondly','then','after','finally','while','therefore','moreover','besides','when','if','since','for example','in addition','on the other hand','furthermore','as well','instead','unless','whereas','overall','in conclusion','though','for instance'];
+function analyze(text,min,L,speak){
+ const t=(text||'').trim();
+ const words=(t.toLowerCase().match(/[a-z']+/g)||[]);
+ const n=words.length;
+ if(n<3)return{score:0,n,notes:[speak?"Javob deyarli aytilmagan yoki kiritilmagan.":"Javob deyarli yozilmagan."],good:[]};
+ const len=Math.min(n/min,1.2)/1.2*(speak?50:40);
+ const uniq=new Set(words).size;
+ const ratio=uniq/n;
+ const div=n>=6?clamp((ratio-.4)/.4,0,1)*20:5;
+ const low=' '+words.join(' ')+' ';
+ let cc=0;CONN.forEach(c=>{if(low.includes(' '+c+' '))cc++});
+ const needC=1+Math.ceil(L/1.5);
+ const conn=Math.min(cc/needC,1)*15;
+ const longR=words.filter(w=>w.length>=7).length/n;
+ const lex=Math.min(longR/(.03+L*.03),1)*(speak?15:10);
+ let sent=0,mech=0,sc=0;
+ if(!speak){
+  sc=t.split(/[.!?]+/).filter(s=>s.trim().length>2).length;
+  sent=Math.min(sc/(1+Math.ceil(min/15)),1)*10;
+  mech=(/^[A-Z]/.test(t)?2.5:0)+(/[.!?]$/.test(t)?2.5:0);
+ }
+ const score=Math.round(clamp(len+div+conn+lex+sent+mech,0,100));
+ const notes=[],good=[];
+ if(n<min)notes.push(`So'zlar soni kam: ${n} ta (kamida ${min} ta kerak edi).`);else good.push(`So'zlar soni yetarli (${n} ta).`);
+ if(n>=6&&ratio<.55)notes.push("Bir xil so'zlar ko'p takrorlangan — sinonimlardan foydalaning.");
+ if(cc<Math.min(needC,2))notes.push("Bog'lovchi so'zlar (because, however, although, also) kam ishlatilgan.");else if(cc>=needC)good.push("Bog'lovchi so'zlardan yaxshi foydalangansiz.");
+ if(L>=2&&longR<(.03+L*.03)*.6)notes.push("Murakkabroq va aniqroq so'zlarni ko'proq ishlating.");
+ if(!speak){
+  if(sc<1+Math.ceil(min/15)*.6)notes.push("Gaplar soni kam yoki nuqta/so'roq belgilari qo'yilmagan.");
+  if(!/^[A-Z]/.test(t)||!/[.!?]$/.test(t))notes.push("Bosh harf va tinish belgilariga e'tibor bering.");
+ }
+ if(score>=70)good.push("Umuman olganda javob mazmunli va tuzilishi yaxshi.");
+ return{score,n,notes,good};
+}
+function finish(){
+ show(`<div class="loader"><div class="spin"></div><h2 id="lt">Javoblar tekshirilmoqda…</h2><p class="sub">Aqlli tahlil ishlamoqda</p></div>`);
+ const msgs=['Javoblar tekshirilmoqda…','Xatolar aniqlanmoqda…','Daraja hisoblanmoqda…','Natija tayyorlanmoqda…'];
+ let i=0;const iv=setInterval(()=>{i++;const e=$('#lt');if(e&&msgs[i])e.textContent=msgs[i]},700);
+ setTimeout(()=>{clearInterval(iv);compute();results()},2900);
+}
+function compute(){
+ const secs=S.T.map(sec=>{
+  if(sec.type==='mcq'){
+   let c=0;const miss=[];sec.items.forEach(it=>{if(it.user===it.ans)c++;else miss.push(it)});
+   return{id:sec.id,score:Math.round(c/sec.items.length*100),c,t:sec.items.length,miss,type:'mcq'};
+  }
+  const a=analyze(sec.text,sec.min,S.L,sec.id==='speaking');
+  return{id:sec.id,score:a.score,a,type:'txt'};
+ });
+ let overall=0;secs.forEach(s=>overall+=s.score*SK[s.id].w);overall=Math.round(overall);
+ const L=S.L;
+ let real=overall>=85?L+1:overall>=55?L:overall>=35?L-1:L-2;real=clamp(real,0,5);
+ const e=clamp(L+(overall-60)/30,0,5);
+ const band=Math.round((1.5+e*1.3)*2)/2;
+ const verdict=overall>=75?'good':overall>=50?'mid':'bad';
+ S.R={secs,overall,real,e,band,verdict};
+}
+function results(){
+ const R=S.R,L=LEVELS[S.L],rl=LEVELS[R.real];
+ const vt={good:['Yaxshi','b-good','👏'],mid:["O'rtacha",'b-mid','👍'],bad:['Past','b-bad','💪']}[R.verdict];
+ const sorted=R.secs.slice().sort((a,b)=>b.score-a.score);
+ const best=sorted[0],worst=sorted[sorted.length-1];
+ const ieltsOk=R.band>=6,cefrOk=R.e>=3.8;
+ const gapI=Math.max(0,6-R.band).toFixed(1);
+ const goal=S.p.goal;
+ const circ=2*Math.PI*80;
+ const secHtml=R.secs.map(s=>{
+  const k=SK[s.id];
+  const lab=s.score>=80?"A'lo":s.score>=60?'Yaxshi':s.score>=40?"O'rtacha":'Past';
+  const col=s.score>=60?'var(--good)':s.score>=40?'var(--warn)':'var(--bad)';
+  let det='';
+  if(s.type==='mcq'){
+   det+=`<div style="font-size:13px;color:var(--muted);margin-bottom:6px">${s.c} / ${s.t} to'g'ri</div>`;
+   if(!s.miss.length)det+=`<div class="ok">✅ Barcha javoblar to'g'ri!</div>`;
+   s.miss.forEach(m=>{det+=`<div class="miss">❌ <b>${esc(m.q)}</b><br>Sizning javobingiz: ${m.user?esc(m.user):'<i>javob berilmagan</i>'}<br>To'g'ri javob: <b>${esc(m.ans)}</b></div>`});
+  }else{
+   det+=`<div style="font-size:13px;color:var(--muted);margin-bottom:6px">${s.a.n} ta so'z</div>`;
+   s.a.good.forEach(g=>det+=`<div class="ok">✅ ${g}</div>`);
+   s.a.notes.forEach(g=>det+=`<div class="note">⚠️ ${g}</div>`);
+  }
+  if(S.weak.includes(s.id))det+=`<div style="font-size:12px;color:var(--muted);margin-top:6px">ℹ️ Siz bu yerda qiynalishingizni aytgandingiz — ${s.score<60?"natija buni tasdiqladi.":"lekin natijangiz yaxshi chiqdi!"}</div>`;
+  return`<div class="card sec"><div class="hd"><span class="e">${k.e}</span><b>${k.n}</b><span style="color:${col}">${s.score}%</span></div>
+  <div class="bar"><div class="sbar" data-w="${s.score}" style="background:${col}"></div></div>
+  <div style="font-size:12px;color:var(--muted);margin:5px 0 8px">${lab}</div>${det}</div>`;
+ }).join('');
+ show(`<div class="center"><h2>${vt[2]} Natijangiz, ${esc(S.p.name)}!</h2></div>
+ <div class="card center">
+  <div class="ringwrap"><svg width="200" height="200" viewBox="0 0 200 200"><defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c5cff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="var(--card2)" stroke-width="16"/>
+  <circle class="fg" id="fg" cx="100" cy="100" r="80" fill="none" stroke="url(#gr)" stroke-width="16" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"/></svg>
+  <div class="num"><div><b id="tot">0</b><small>/ 100 umumiy ball</small></div></div></div>
+  <div style="margin-top:6px"><span class="badge ${vt[1]}">${L.n} darajasi uchun: ${vt[0]} ko'rsatkich</span></div>
+  <p class="sub" style="margin:12px 0 0">Eng kuchli: <b>${SK[best.id].n}</b> (${best.score}%) · Eng zaif: <b>${SK[worst.id].n}</b> (${worst.score}%)</p>
+ </div>
+
+ <h3 style="margin:20px 4px 0">📋 Bo'limlar bo'yicha tahlil</h3>
+ ${secHtml}
+
+ <div class="card"><h3>🧠 Tavsiya</h3>
+  <p style="margin:0;line-height:1.55;font-size:14px">${worst.score<70?`Eng ko'p e'tibor kerak bo'lgan bo'lim: <b>${SK[worst.id].n}</b>. ${TIPS[worst.id]}`:`Natijalar tekis va yaxshi. Keyingi darajaga o'tish uchun barcha bo'limlarda mashqni davom ettiring.`}</p>
+  ${sorted[sorted.length-2]&&sorted[sorted.length-2].score<60&&sorted[sorted.length-2].id!==worst.id?`<p style="margin:10px 0 0;line-height:1.55;font-size:14px">Shuningdek, <b>${SK[sorted[sorted.length-2].id].n}</b> ham mustahkamlashni talab qiladi. ${TIPS[sorted[sorted.length-2].id]}`:''}
+ </div>
+
+ <h3 style="margin:20px 4px 0">🏆 Imtihonga tayyorgarlik</h3>
+ <div class="card ready" style="${goal==='IELTS'||goal==='Ikkalasi'?'border-color:var(--a2)':''}"><div class="ic">${ieltsOk?'✅':'❌'}</div><div><b>IELTS (maqsad: 6.0)</b><div style="font-size:14px;margin-top:3px">Taxminiy ball: <b>${R.band.toFixed(1)}</b></div><div style="font-size:13px;color:var(--muted);margin-top:3px">${ieltsOk?'Siz IELTS 6.0 uchun tayyorsiz!':`Hali tayyor emassiz — taxminan ${gapI} ball yetishmayapti.`}</div></div></div>
+ <div class="card ready" style="${goal!=='IELTS'?'border-color:var(--a2)':''}"><div class="ic">${cefrOk?'✅':'❌'}</div><div><b>CEFR sertifikat (maqsad: B2)</b><div style="font-size:13px;color:var(--muted);margin-top:3px">${cefrOk?'Siz B2 darajasiga yetgansiz — tayyorsiz!':`Hali tayyor emassiz. Hozirgi daraja: ${rl.cefr}. B2 ga yetish uchun yana o'rganish kerak.`}</div></div></div>
+
+ <div class="card center" style="border-color:var(--a1)">
+  <div style="color:var(--muted);font-size:13px">Sizning asl darajangiz</div>
+  <div style="font-size:44px;margin:4px 0">${rl.e}</div>
+  <h2 class="grad" style="margin:0">${rl.n}</h2>
+  <div style="color:var(--muted);margin-top:2px">CEFR: ${rl.cefr}</div>
+  ${R.real!==S.L?`<p class="sub" style="margin:10px 0 0;font-size:13px">Siz ${L.n} deb tanlagandingiz, natija esa ${R.real>S.L?'undan yuqori':'undan past'} chiqdi.</p>`:`<p class="sub" style="margin:10px 0 0;font-size:13px">Tanlagan darajangiz natijaga mos keldi.</p>`}
+ </div>
+ <button class="btn good" onclick="retake()">🎯 Keling, ${rl.n} darajasidagi testni topshiramiz</button>
+ <button class="btn ghost" onclick="exitApp()">Chiqish</button>`);
+ setTimeout(()=>{
+  const fg=$('#fg');if(fg)fg.style.strokeDashoffset=circ*(1-R.overall/100);
+  document.querySelectorAll('.sbar').forEach(b=>{b.style.transition='width 1.4s cubic-bezier(.2,.8,.2,1)';b.style.width=b.dataset.w+'%'});
+  const el=$('#tot');const t0=performance.now();
+  (function step(t){const p=Math.min((t-t0)/1800,1);el.textContent=Math.round(R.overall*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)})(t0);
+  if(R.overall>=70)confetti();
+ },120);
+}
+function retake(){S.L=S.R.real;S.retake=true;S.weak=[];readyScreen()}
+function exitApp(){
+ try{if(window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.App)Capacitor.Plugins.App.exitApp()}catch(e){}
+ try{window.close()}catch(e){}
+ show(`<div class="hero"><div class="logo">👋</div><h1>Rahmat, <span class="grad">${esc(S.p.name||'do\'stim')}</span>!</h1><p class="sub">Muvaffaqiyatlar tilaymiz. Har kuni oz-ozdan mashq qilsangiz, maqsadingizga albatta yetasiz!</p><button class="btn" onclick="welcome()">Bosh sahifaga qaytish</button></div>`);
+}
+function confetti(){
+ const c=$('#conf'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+ const cols=['#7c5cff','#00d4ff','#2ee59d','#ffc044','#ff5ca8'];
+ const P=Array.from({length:110},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,r:4+Math.random()*6,c:cols[Math.floor(Math.random()*5)],vy:2+Math.random()*4,vx:-1.5+Math.random()*3,a:Math.random()*6}));
+ let f=0;(function d(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.y+=p.vy;p.x+=p.vx+Math.sin(p.a+=.05);x.fillStyle=p.c;x.fillRect(p.x,p.y,p.r,p.r*1.6)});if(++f<260)requestAnimationFrame(d);else x.clearRect(0,0,c.width,c.height)})();
+}
+welcome();
+</script>
+</body>
+</html>
